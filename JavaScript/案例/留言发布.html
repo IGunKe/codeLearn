@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        li {
+            width: 300px;
+            margin-bottom: 5px;
+            list-style: none;
+            background-color: pink;
+        }
+
+        li a {
+            float: right;
+        }
+    </style>
+</head>
+
+<body>
+    <textarea name="" id="" cols="30" rows="10"></textarea>
+    <button>按钮</button>
+    <ul>
+        <li>123</li>
+    </ul>
+    <script>
+        var ul = document.querySelector('ul');
+        var btn = document.querySelector('button');
+        var text = document.querySelector('textarea');
+        btn.onclick = function () {
+            if (text.value === '') {
+                console.log('请输入内容');
+            } else {
+                var li = document.createElement('li');
+                ul.insertBefore(li, ul.children[0]);
+                //href='javascript:;' 表示不跳转
+                ul.firstElementChild.innerHTML = text.value + "<a href='javascript:;'>删除</a>";
+                text.value = '';
+                var as = ul.querySelectorAll('a');
+
+                for (var i = 0; i < as.length; i++) {
+                    as[i].onclick = function() {
+                        ul.removeChild(this.parentNode);
+                    }
+                }
+            }
+        }
+        
+    </script>
+</body>
+
+</html>

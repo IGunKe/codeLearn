@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            
+            width: 100px;
+            height: 200px;
+            background-color: pink;
+        }
+    </style>
+    <script src="jquery.mini.js"></script>
+</head>
+<body>
+    <button>淡入</button>
+    <button>淡出</button>
+    <button>淡入淡出</button>
+    <button>自定义</button>
+    <div>123</div>
+    <script>
+        $(function() {
+            $('button').eq(0).click(function() {
+                $('div').stop().fadeOut();
+            });
+            $('button').eq(1).click(function() {
+                $('div').stop().fadeIn();
+            });
+            $('button').eq(2).click(function() {
+                $('div').stop().fadeToggle();
+            });
+            $('button').eq(3).click(function() {
+                $('div').fadeTo(1000, .3);
+            });
+        });
+    </script>
+</body>
+</html>

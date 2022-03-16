@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="jquery.mini.js"></script>
+</head>
+
+<body>
+    <div>hello</div>
+    <div>hello</div>
+    <div>hello</div>
+    <div>hello</div>
+    <ul>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li>123</li>
+    </ul>
+    <script>
+        $(document).ready(function () {
+            $('div').css('background-color', 'red');
+            $('div').css('font-size', '14px');
+            $('div:last').css('background-color', 'pink');
+            $('ul li:odd').css('background-color', 'pink');
+            $('ul li:eq(3)').css('color', 'green');
+            console.log($('li').parent());
+            $('ul li:eq(3)').prevAll()
+        });
+    </script>
+</body>
+
+</html>

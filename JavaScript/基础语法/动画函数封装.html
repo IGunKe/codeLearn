@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            position: absolute;
+            left: 0;
+            width: 100px;
+            height: 100px;
+            background-color: pink;
+        }
+    </style>
+</head>
+
+<body>
+    <button>按钮</button>
+    <div></div>
+    
+    <script>
+        function animate(obj, target, callback) {
+            clearInterval(obj.timer);
+            obj.timer = setInterval(remove, 30);
+            
+            function remove() {
+                var step = Math.ceil((target - obj.offsetLeft) / 10);
+                if (obj.offsetLeft >= target) {
+                    clearInterval(obj.timer);
+                    if (callback) {
+                        callback();
+                    }
+                    // obj.style.left = obj.offsetLeft + 'px';
+                } else {
+                    obj.style.left = obj.offsetLeft + step + 'px';
+                }
+            }
+            
+        }
+        // 动画原理
+        // 1，获得元素当前的位置：offsetLeft
+        // 2，需要移动的距离
+        // 3，定时器重复该动作
+        // 4，结束动作
+        var div = document.querySelector('div');
+        var btn = document.querySelector('button');
+        btn.addEventListener('click', function() {
+            animate(div, 400, chargeColor);
+        });
+        function chargeColor() {
+            div.style.backgroundColor = 'red';
+        }
+    </script>
+</body>
+
+</html>

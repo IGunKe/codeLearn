@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="wrap">
+        <table>
+            <thead>
+                <tr>
+                    <td>
+                        <input type="checkbox" id="j_cbAll">
+                    </td>
+                    <td>商品</td>
+                    <td>价格</td>
+                </tr>
+            </thead>
+            <tbody id="j_tb">
+                <tr>
+                    <td>
+                        <input type="checkbox" name="" id="">
+                    </td>
+                    <td>ipone 8</td>
+                    <td>8000</td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="checkbox">
+                    </td>
+                    <td>小米</td>
+                    <td>5000</td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="checkbox">
+                    </td>
+                    <td>华为</td>
+                    <td>3000</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <script>
+        var j_cbAll = document.querySelector('#j_cbAll');
+        var inputs = document.getElementById('j_tb').querySelectorAll('input');
+        
+        j_cbAll.onclick = function() {
+            console.log(this.checked);
+            for (var i = 0; i < inputs.length; i++) {
+                // 选定状态
+                inputs[i].checked = this.checked;
+            }
+        }
+        for (var j = 0; j < inputs.length; j++) {
+            inputs[j].onclick = function() {
+                var flag = true;
+                for (var t = 0; t < inputs.length; t++) {
+                    if (!inputs[t].checked) {
+                        flag = false;
+                    }
+                }
+                j_cbAll.checked = flag;
+
+            }
+        }
+        
+    </script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="jquery.mini.js"></script>
+</head>
+
+<body>
+    <input type="checkbox" name="" id="" class="box" />
+    <div>
+        <input type="checkbox" name="" id="" />
+        <input type="checkbox" name="" id="" />
+        <input type="checkbox" name="" id="" />
+    </div>
+    <script>
+        $(function () {
+            $('.box').change(function() {
+                $('div').children('input').prop('checked', $(this).prop('checked'));
+            });
+            $('div').children('input').change(function() {
+                if ($('div input:checked').length === 3) {
+                    $('.box').prop('checked', true);
+                } else {
+                    $('.box').prop('checked', false);
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

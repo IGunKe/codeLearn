@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        .search {
+            position: relative;
+            width: 200px;
+            height: 60px;
+            margin: 100px auto;
+        }
+        .con {
+            display: none;
+            position: absolute;
+            top: -40px;
+            width: 200px;
+            height: 30px;
+            line-height: 30px;
+            font-size: 18px;
+            border: 1px solid #999;
+            margin-bottom: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, .3);
+        }
+        .con::before {
+            content: '';
+            width: 0;
+            height: 0;
+            position: absolute;
+            top: 30px;
+            left: 16px;
+            border: 8px solid #999;
+            border-color: #fff transparent transparent;
+
+        }
+        .jd {
+            width: 200px;
+            height: 20px;
+            line-height: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="search">
+        <div class="con">123</div>
+        <input type="text" placeholder="请输入快递单号" class="jd">
+    </div>
+    <script>
+        var con = document.querySelector('.con');
+        var jd = document.querySelector('.jd');
+        jd.addEventListener('keyup', function(e) {
+            con.innerHTML = this.value;
+            if (this.value !== '') {
+                con.style.display = 'block';
+            } else {
+                con.style.display = '';
+            }
+            
+        });
+    </script>
+</body>
+</html>

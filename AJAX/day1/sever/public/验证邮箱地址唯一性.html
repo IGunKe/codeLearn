@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .bg-danger {
+            background-color: pink;
+        }
+
+        .bg-success {
+            background-color: green;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="container">
+        <div class="form-group">
+            <label for="">邮箱地址</label>
+            <input type="email" class="form-control" placeholder="请输入邮箱地址">
+        </div>
+        <!-- 错误bg-danger 正确 bg-success -->
+        <p class="info"></p>
+    </div>
+    <script src="../js/ajax.js"></script>
+    <script>
+        var form_control = document.querySelector('.form-control');
+        var p_info = document.querySelector('.info');
+        var flag = true;
+
+        form_control.addEventListener('blur', function () {
+            // 获取输入的email
+            var email = this.value;
+
+            // 验证邮箱的正则表达式
+            var reg = /[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.[a-zA-Z0-9]{2,6}$/;
+
+            if (!reg.test(email)) {
+                p_info.innerHTML = '请输入正确的邮箱';
+                p_info.className = 'bg-danger';
+                return;
+            }
+
+            // 发送请求
+            ajax({
+                type: 'get',
+                url: 'http://localhost:8000/verifyEmailAddress',
+                data: {
+                    email: email
+
+                },
+                header: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                // 只有xhr接收完后才执行
+                success: function (result) {
+                    console.log(result);
+                    p_info.innerHTML = result.message;
+                    p_info.className = 'bg-success';
+                },
+                error: function (result) {
+                    console.log(result);
+                    p_info.innerHTML = result.message;
+                    p_info.className = 'bg-danger';
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            background-color: #999;
+            margin: 100px auto;
+            overflow: hidden;
+        }
+
+        .father {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            width: 100px;
+            height: 100px;
+            background-color: pink;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <div class="father"></div>
+    </div>
+    <script>
+        var father = document.querySelector('.father');
+        //注意带有定位的父元素会影响offsetTop，offsetLeft
+        console.log(father.offsetTop);
+        console.log(father.offsetLeft);
+        //注意这是包含padding，border
+        console.log(father.offsetWidth);
+        console.log(father.offsetHeight);
+    </script>
+</body>
+</html>

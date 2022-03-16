@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            background-color: rgb(177, 43, 137);
+        }
+    </style>
+</head>
+<body>
+    <script>
+        var bd = document.querySelector('body');
+        var flag = 0;
+        // document.addEventListener('keyup', function(e) {
+        //     if (flag == 0) {
+        //         bd.style.backgroundColor = 'pink';
+        //         flag = 1;
+        //     } else {
+        //         bd.style.backgroundColor = 'rgb(177, 43, 137)';
+        //         flag = 0;
+        //     }
+        // });
+        // document.addEventListener('keydown', function(e) {
+        //     if (flag == 0) {
+        //         bd.style.backgroundColor = 'pink';
+        //         flag = 1;
+        //     } else {
+        //         bd.style.backgroundColor = 'rgb(177, 43, 137)';
+        //         flag = 0;
+        //     }
+        // });
+        document.addEventListener('keyup', function(e) {
+            console.log(e.keyCode);
+            //keyup和keydown不区分大小写，可以用keypress
+        });
+    </script>
+</body>
+</html>

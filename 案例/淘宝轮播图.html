@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+        .tb-promo {
+            position: relative;
+            width: 520px;
+            height: 280px;
+            margin: 0 auto;
+        }
+        .tb-promo img {
+            width: 520px;
+            height: 280px;
+        }
+        .tb-promo a {
+            text-decoration: none;
+        }
+        .prev {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 20px;
+            height: 30px;
+            text-align: center;
+            line-height: 30px;
+            color: white;
+            background-color: rgba(0, 0, 0, .3);
+            border-top-right-radius: 15px;
+            border-bottom-right-radius: 15px;
+        }
+        .next {
+            position: absolute;
+            top: 50%;
+            right: 0;
+            width: 20px;
+            height: 30px;
+            text-align: center;
+            line-height: 30px;
+            color: white;
+            background-color: rgba(0, 0, 0, .3);
+            border-top-left-radius: 15px;
+            border-bottom-left-radius: 15px;
+        }
+        .promo-nav {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            margin-left: -35px;
+            width: 70px;
+            height: 13px;
+            background-color: rgba(255, 255, 255, .3);
+            border-radius: 6px;
+        }
+
+        .promo-nav li {
+            float: left;
+            width: 8px;
+            height: 8px;
+            background-color: #fff;
+            list-style: none;
+            border-radius: 4px;
+            margin: 3px;
+        }
+    </style>
+</head>
+<body>
+    <div class="tb-promo">
+        <img src="../image/tb.jpg" alt="">
+        <a href="" class="prev">&lt;</a>
+        <a href="" class="next">&gt;</a>
+        <ul class="promo-nav">
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </div>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box > div {
+            width: 200px;
+            height: 200px;
+            background-color: pink;
+        }
+    </style>
+    <script src="../js/template-web.js"></script>
+</head>
+<body>
+    <div class="box"></div>
+    <!-- 准备模版 -->
+    <script type="text/html" id="tpl">
+        <div>{{username}} {{age}}</div>
+    </script>
+    <script>
+        // 模版与数据拼接
+        var html = template('tpl', {username: 'zdj', age: 20});
+        document.querySelector('.box').innerHTML = html;
+    </script>
+</body>
+</html>

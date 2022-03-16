@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        li {
+            list-style: none;
+        }
+
+
+
+        ul li img {
+            float: left;
+            width: 520px;
+            height: 280px;
+        }
+
+        .main {
+            width: 520px;
+            height: 280px;
+            margin: 100px auto;
+            overflow: hidden;
+        }
+
+        .focus {
+            position: relative;
+            width: 520px;
+            height: 280px;
+        }
+
+        .focus ul {
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            width: 800%;
+        }
+
+        .arrow-l,
+        .arrow-r {
+            position: absolute;
+            top: 140px;
+            width: 20px;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+            color: white;
+            background-color: rgba(0, 0, 0, .3);
+            z-index: 1;
+        }
+
+        .arrow-l {
+            left: 0;
+            display: none;
+            border-top-right-radius: 15px;
+            border-bottom-right-radius: 15px;
+        }
+
+        .arrow-r {
+            left: 500px;
+            display: none;
+            border-top-left-radius: 15px;
+            border-bottom-left-radius: 15px;
+        }
+
+        ol {
+            position: absolute;
+            bottom: 6px;
+            left: 40px;
+            width: 100px;
+            height: 10px;
+        }
+
+        ol li {
+            float: left;
+            width: 10px;
+            height: 10px;
+            border-radius: 5px;
+            margin-left: 3px;
+            border: 1px solid #999;
+            background-color: #fff;
+        }
+
+        ol .current {
+            background-color: #f04907;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main">
+        <div class="focus">
+            <!-- //left -->
+            <a href="javascript:;" class="arrow-l">&lt;</a>
+            <!-- //right -->
+            <a href="javascript:;" class="arrow-r">&gt;</a>
+            <ul>
+                <li class="current">
+                    <a href="#"><img src="../images/tb.jpg" alt=""></a>
+                </li>
+                <li>
+                    <a href="#"><img src="../images/tb5.jpg" alt=""></a>
+                </li>
+                <li>
+                    <a href="#"><img src="../images/tb2.jpg" alt=""></a>
+                </li>
+                <li>
+                    <a href="#"><img src="../images/tb3.jpg" alt=""></a>
+                </li>
+                <li>
+                    <a href="#"><img src="../images/tb4.jpg" alt=""></a>
+                </li>
+            </ul>
+            <ol class="circle"></ol>
+        </div>
+    </div>
+    <script>
+        function animate(obj, target, callback) {
+            clearInterval(obj.timer);
+            obj.timer = setInterval(remove, 30);
+
+            function remove() {
+                var step = (target - obj.offsetLeft) / 10;
+                step = step > 0 ? Math.ceil(step) : Math.floor(step);
+                if (obj.offsetLeft == target) {
+                    clearInterval(obj.timer);
+                    if (callback) {
+                        callback();
+                    }
+                    // obj.style.left = obj.offsetLeft + 'px';
+                } else {
+                    obj.style.left = obj.offsetLeft + step + 'px';
+                }
+            }
+
+        }
+        window.addEventListener('load', function () {
+            var arrow_l = document.querySelector('.arrow-l');
+            var arrow_r = document.querySelector('.arrow-r');
+            var focus = document.querySelector('.focus');
+            var focusWidth = focus.offsetWidth;
+            //左右键
+            focus.addEventListener('mouseover', function () {
+                arrow_l.style.display = 'block';
+                arrow_r.style.display = 'block';
+                clearInterval(timer);
+                timer = null; //清除定时器
+            });
+            focus.addEventListener('mouseout', function () {
+                arrow_l.style.display = 'none';
+                arrow_r.style.display = 'none';
+                timer = setInterval(function () {
+                    arrow_l.click();
+                }, 2000);
+            });
+            //动态生成小圆圈,使得与图片数一致
+            var ul = focus.querySelector('ul');
+            // var lis = ul.children;
+            // console.log(lis.length);
+            var ol = focus.querySelector('ol');
+            var len = ul.children.length;
+            for (var i = 0; i < len; i++) {
+                var li = document.createElement('li');
+                li.setAttribute('index', i);
+                ol.appendChild(li);
+                li.addEventListener('click', function () {
+                    for (var j = 0; j < len; j++) {
+                        ol.children[j].className = '';
+                        ol.children[j].style.backgroundColor = '#fff';
+                    }
+                    this.className = 'current';
+                    this.style.backgroundColor = '#f04907';
+                    //点击圆圈移动图片
+                    var index = this.getAttribute('index');
+                    // console.log(index);
+                    // var focusWidth = focus.offsetWidth;
+                    // console.log(focusWidth);
+                    num = index;
+                    circle = index;
+                    animate(ul, -(index * focusWidth));
+                });
+            }
+
+
+            var first = ul.children[0].cloneNode(true);
+            ul.appendChild(first);
+            //点击左右，移动轮播图
+            var num = 0;
+            //控制小圆点
+            var circle = 0;
+            //节流阀
+            var flag = true;
+            arrow_r.addEventListener('click', function () {
+                if (flag) {
+                    flag = false;
+                    if (num == ol.children.length) {
+                        ul.style.left = 0;
+                        num = 0;
+                    }
+                    num++;
+                    animate(ul, -(num * focusWidth), function () {
+                        flag = true;
+                    });
+                    circle++;
+                    if (circle == ol.children.length) {
+                        circle = 0;
+                    }
+                    for (var i = 0; i < ol.children.length; i++) {
+                        ol.children[i].className = '';
+                    }
+                    ol.children[circle].className = 'current';
+                }
+            });
+
+            arrow_l.addEventListener('click', function () {
+                    if (flag) {
+                        flag = false;
+                        if (num == 0) {
+                            num = ol.children.length - 1;
+                            ul.style.left = -num * focusWidth + 'px';
+
+                        }
+                        num--;
+                        animate(ul, -(num * focusWidth), function() {
+                            flag = true;
+                        });
+                        circle--;
+                        if (circle < 0) {
+                            circle = ol.children.length - 1;
+                        }
+                        for (var i = 0; i < ol.children.length; i++) {
+                            ol.children[i].className = '';
+                        }
+                        ol.children[circle].className = 'current';
+                    }
+            });
+            var timer = setInterval(function () {
+                arrow_l.click();
+            }, 2000);
+        });
+    </script>
+</body>
+
+</html>

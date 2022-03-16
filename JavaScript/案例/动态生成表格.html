@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        a {
+            text-decoration: none;
+        }
+        table {
+            margin: 100px auto;
+            border-collapse: collapse;
+        }
+
+        thead {
+            background-color: #999;
+        }
+
+        td {
+            width: 70px;
+            height: 30px;
+            font-size: 12px;
+            line-height: 30px;
+            text-align: center;
+            border: 1px solid #333;
+        }
+    </style>
+</head>
+
+<body>
+    <table>
+        <thead>
+            <tr>
+                <td>姓名</td>
+                <td>科目</td>
+                <td>成绩</td>
+                <td>操作</td>
+            </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+    </table>
+    <script>
+        var date = [{
+                name: 'xdj',
+                subject: 'javascript',
+                score: 100
+            },
+            {
+                name: 'xdj1',
+                subject: 'javascript',
+                score: 90
+            }
+        ];
+        //tbody 里放tr
+        var tbody = document.querySelector('tbody');
+        for (var i = 0; i < date.length; i++) {
+            var tr = document.createElement('tr');
+            tbody.appendChild(tr);
+            //创建单元格
+            for (var key in date[i]) {
+                var td = document.createElement('td');
+                tr.appendChild(td);
+                td.innerHTML = date[i][key];
+            }
+            //创建删除格
+            var td = document.createElement('td');
+            td.innerHTML = "<a href='javascript:;'>删除</a>";
+            tr.appendChild(td);
+        }
+        var as = tbody.querySelectorAll('a');
+        for (var i = 0; i < as.length; i++) {
+            as[i].onclick = function() {
+                var td = this.parentNode;
+                tbody.removeChild(td.parentNode);
+            }
+        }
+    </script>
+</body>
+
+</html>

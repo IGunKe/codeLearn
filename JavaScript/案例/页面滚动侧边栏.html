@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            position: relative;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        .w {
+            width: 1200px;
+            margin: auto;
+        }
+        .header {
+            height: 200px;
+            background-color: #999;
+            margin: 28px auto;
+        }
+        .banner {
+            height: 400px;
+            background-color: red;
+        }
+        .banner .w {
+            height: 400px;
+        }
+        .main {
+            height: 1800px;
+            background-color: green;
+        }
+
+        .slider-bar {
+            position: absolute;
+            top: 300px;
+            right: 120px;
+            width: 36px;
+            height: 136px;
+            background-color: pink;
+        }
+        .goBack {
+            display: none;
+            width: 100%;
+            height: 36px;
+            margin-top: 70px;
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="slider-bar">
+        <span class="goBack">返回顶部</span>
+    </div>
+    <div class="header w">header</div>
+    <div class="banner w">banner</div>
+    <div class="main w"> main</div>
+    <script>
+        var goBack = document.querySelector('.goBack');
+        var banner = document.querySelector('.banner');
+        var sliderbar = document.querySelector('.slider-bar');
+        
+        var bannerTop = banner.offsetTop;
+        var sliderbarTop = sliderbar.offsetTop - bannerTop;
+
+        var main = document.querySelector('.main');
+        var goBack = document.querySelector('.goBack');
+        var mainTop = main.offsetTop;
+        document.addEventListener('scroll', function() {
+            if (window.pageYOffset >= bannerTop) {
+                sliderbar.style.position = 'fixed';
+                sliderbar.style.top = sliderbarTop + 'px';
+            } else {
+                sliderbar.style.position = 'absolute';
+                sliderbar.style.top = '300px';
+            }
+            if (window.pageYOffset > mainTop) {
+                goBack.style.display = 'block';
+            } else {
+                goBack.style.display = 'none';
+            }
+        });
+        goBack.addEventListener('click', function() {
+            animate(window, 0);
+        });
+        function animate(obj, target, callback) {
+            clearInterval(obj.timer);
+            obj.timer = setInterval(remove, 30);
+            
+            function remove() {
+                var step = (target - window.pageYOffset) / 10;
+                step = step > 0 ? Math.ceil(step) : Math.floor(step);
+                if (window.pageYOffset == target) {
+                    clearInterval(obj.timer);
+                    if (callback) {
+                        callback();
+                    }
+                    // obj.style.left = obj.offsetLeft + 'px';
+                } else {
+                    // obj.style.Top = window.pageYOffset + step + 'px';
+                    window.scroll(0,window.pageYOffset + step);
+                }
+            }
+            
+        }
+    </script>
+</body>
+</html>

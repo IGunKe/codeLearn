@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        img {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+        }
+    </style>
+</head>
+
+<body>
+    <img src="../images/头像.jpg" alt="">
+    <script>
+        var img = document.querySelector('img');
+        document.addEventListener('mousemove', function (e) {
+            //注意单位
+            img.style.top = e.pageY -25 + 'px';
+            img.style.left = e.pageX - 25 + 'px';
+        });
+    </script>
+</body>
+
+</html>
